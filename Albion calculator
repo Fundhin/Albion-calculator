@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calcolatore Crafting Albion</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        input { width: 100%; padding: 8px; margin: 5px 0; }
+        button { width: 100%; padding: 10px; background-color: #4CAF50; color: white; border: none; margin-top: 10px; font-size: 16px; }
+        .result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Calcolatore Crafting Albion</h1>
+    <label for="material1">Materiale 1 (Prezzo unitario):</label>
+    <input type="number" id="material1" placeholder="Inserisci prezzo materiale 1" />
+
+    <label for="material2">Materiale 2 (Prezzo unitario):</label>
+    <input type="number" id="material2" placeholder="Inserisci prezzo materiale 2" />
+
+    <label for="material3">Materiale 3 (Prezzo unitario):</label>
+    <input type="number" id="material3" placeholder="Inserisci prezzo materiale 3" />
+
+    <label for="price">Prezzo di vendita:</label>
+    <input type="number" id="price" placeholder="Inserisci prezzo di vendita" />
+
+    <label for="tax">Tassa di crafting (%):</label>
+    <input type="number" id="tax" placeholder="Inserisci percentuale tassa" />
+
+    <button onclick="calculateProfit()">Calcola Profitto</button>
+
+    <div class="result" id="result"></div>
+
+    <script>
+        function calculateProfit() {
+            const material1 = parseFloat(document.getElementById("material1").value) || 0;
+            const material2 = parseFloat(document.getElementById("material2").value) || 0;
+            const material3 = parseFloat(document.getElementById("material3").value) || 0;
+            const price = parseFloat(document.getElementById("price").value) || 0;
+            const tax = parseFloat(document.getElementById("tax").value) || 0;
+
+            const totalCost = material1 + material2 + material3;
+            const totalTax = totalCost * (tax / 100);
+            const finalCost = totalCost + totalTax;
+            const profit = price - finalCost;
+
+            const result = `
+                <p><strong>Costo totale materiali:</strong> ${totalCost.toFixed(2)} silver</p>
+                <p><strong>Costo finale (con tassa):</strong> ${finalCost.toFixed(2)} silver</p>
+                <p><strong>Profitto netto:</strong> ${profit.toFixed(2)} silver</p>
+            `;
+            document.getElementById("result").innerHTML = result;
+        }
+    </script>
+</body>
+</html>
